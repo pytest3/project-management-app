@@ -6,18 +6,18 @@ export const AuthContext = createContext({ user: null });
 
 const authReducer = (state, action) => {
   if (action.type === "login") {
-    return { user: action.payload };
+    return { ...state, user: action.payload };
   } else if (action.type === "logout") {
-    return { user: action.payload };
+    return { ...state, user: null };
+  } else {
+    return state;
   }
-  return;
 };
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, { user: null });
 
   useEffect(() => {
-    console.log("curte");
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch({ type: "login", payload: user });
@@ -28,7 +28,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ state, dispatch }}>
+    <AuthContext.Provider value={{ ...state, dispatch }}>
       {children}
     </AuthContext.Provider>
   );

@@ -8,7 +8,7 @@ export default function UserPage() {
       <NavBar>
         <StyledLink to="profile">Profile</StyledLink>
         <StyledLink to="account">Account</StyledLink>
-        <StyledLink to="account">Safey & Privacy</StyledLink>
+        <StyledLink to="privacy">Safey & Privacy</StyledLink>
       </NavBar>
       <Outlet />
     </>
@@ -28,6 +28,6 @@ const NavBar = styled.nav`
 const StyledLink = styled(NavLink)`
   text-decoration: none;
   &.active {
-    text-decoration: underline;
+    border-bottom: 2px solid gray;
   }
 `;

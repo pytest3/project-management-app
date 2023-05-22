@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 
 export default function AccountPage() {
-  const [profile, setProfile] = useState({
+  const [account, setAccount] = useState({
     email: "",
     password: "",
     gender: "",
@@ -10,16 +10,16 @@ export default function AccountPage() {
   });
 
   function handleEmailChange(e) {
-    setProfile({ ...profile, email: e.target.value });
+    setAccount({ ...account, email: e.target.value });
   }
   function handlePasswordChange(e) {
-    setProfile({ ...profile, password: e.target.value });
+    setAccount({ ...account, password: e.target.value });
   }
   function handleGenderChange(e) {
-    setProfile({ ...profile, gender: e.target.value });
+    setAccount({ ...account, gender: e.target.value });
   }
   function handleCountryChange(e) {
-    setProfile({ ...profile, country: e.target.value });
+    setAccount({ ...account, country: e.target.value });
   }
 
   function handleFormSubmit(e) {

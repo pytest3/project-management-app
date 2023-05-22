@@ -64,13 +64,16 @@ function App() {
     // 1. attach a listener that refers to in memory / local storage
     // 2. this listener only sends request to firebase when user login status
     // changes and not when attaching the listener itself
-    console.log("shere");
     const unSub = onAuthStateChanged(auth, (user) => {
       dispatch({ type: "AUTH_IS_READY", payload: user });
     });
     unSub();
     // unsubscribe from onAuthStateChanged listener
   }, [dispatch]);
+
+  if (!authIsReady) {
+    return <p>Loading...</p>;
+  }
 
   return (
     authIsReady && (

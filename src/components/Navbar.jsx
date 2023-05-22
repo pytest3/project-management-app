@@ -13,13 +13,15 @@ export default function NavBar() {
     <Wrapper>
       <h1>PM</h1>
 
-      {user && <div>{user.email} is logged in </div>}
       <NavbarActions>
-        <Link to="/">Login</Link>
-        <Link to="/" onClick={logOut}>
-          Logout
-        </Link>
-        <Link to="/signup">Signup</Link>
+        {!user && <Link to="/login">Login</Link>}
+        {!user && <Link to="/signup">Signup</Link>}
+        {user && (
+          <Link to="/login" onClick={logOut}>
+            Logout
+          </Link>
+        )}
+        {user && <Link to="/home">Home</Link>}
       </NavbarActions>
     </Wrapper>
   );
@@ -27,11 +29,12 @@ export default function NavBar() {
 
 const Wrapper = styled.nav`
   display: grid;
-  grid-template-columns: repeat(3, auto);
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-content: space-between;
 `;
 
 const NavbarActions = styled.div`
   display: flex;
   gap: 20px;
+  justify-content: end;
 `;

@@ -28,7 +28,6 @@ export default function HomePage() {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 250px 1fr;
-  height: 100%;
 `;
 const AvatarWrapper = styled(Link)`
   display: grid;
@@ -49,6 +48,7 @@ const Sidebar = styled.div`
 
 const Main = styled.div`
   background-color: #ccd5ae;
+  padding: 16px;
 `;
 
 const StyledLink = styled(Link)`

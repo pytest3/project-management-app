@@ -28,6 +28,8 @@ export default function HomePage() {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 250px 1fr;
+  height: 100%;
+  padding: 16px 0px;
 `;
 const AvatarWrapper = styled(Link)`
   display: grid;
@@ -39,16 +41,16 @@ const AvatarImage = styled.img`
 `;
 
 const Sidebar = styled.div`
-  background-color: #e9edc9;
   justify-items: center;
   display: grid;
   justify-content: center;
   align-content: start;
+  padding: 16px;
+  border-right: 1px solid gray;
 `;
 
 const Main = styled.div`
-  background-color: #ccd5ae;
-  padding: 16px;
+  padding: 16px 32px;
 `;
 
 const StyledLink = styled(Link)`

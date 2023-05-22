@@ -33,6 +33,7 @@ const Wrapper = styled.nav`
   justify-content: space-between;
   background-color: hsl(210, 29%, 97%);
   padding: 4px 8px;
+  grid-area: nav;
 `;
 
 const NavbarActions = styled.div`

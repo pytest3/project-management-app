@@ -31,6 +31,8 @@ const Wrapper = styled.nav`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   justify-content: space-between;
+  background-color: hsl(210, 29%, 97%);
+  padding: 4px 8px;
 `;
 
 const NavbarActions = styled.div`

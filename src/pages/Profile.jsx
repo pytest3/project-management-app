@@ -3,8 +3,9 @@ export default function ProfilePage() {
     <>
       <ul>
         <li>
-          <h1>Profile Picture</h1>
-          <img />
+          <h1>Add/Change Profile Picture</h1>
+          <button>Choose image</button>
+          <button>Upload image</button>
         </li>
         <li>
           <h1>Bio</h1>

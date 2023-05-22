@@ -14,6 +14,7 @@ import UserPage from "./pages/User";
 import AccountPage from "./pages/Account";
 import ProfilePage from "./pages/Profile";
 import DashboardPage from "./pages/Dashboard";
+import SafetyAndPrivacy from "./pages/SafetyAndPrivacy";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,7 @@ const router = createBrowserRouter([
                   { index: true, element: <ProfilePage /> },
                   { path: "profile", element: <ProfilePage /> },
                   { path: "account", element: <AccountPage /> },
+                  { path: "privacy", element: <SafetyAndPrivacy /> },
                 ],
               },
               {

@@ -9,11 +9,22 @@ export default function Root() {
   return (
     <Wrapper>
       <NavBar></NavBar>
-      <Outlet></Outlet>
+      <OutletWrapper>
+        <Outlet></Outlet>
+      </OutletWrapper>
     </Wrapper>
   );
 }
 
 const Wrapper = styled.div`
   height: 100%;
+  display: grid;
+  grid-template-areas:
+    "nav"
+    "main";
+  grid-template-rows: auto 1fr;
+`;
+
+const OutletWrapper = styled.div`
+  grid-area: main;
 `;

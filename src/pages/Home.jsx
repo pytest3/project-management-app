@@ -27,7 +27,7 @@ export default function HomePage() {
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 250px 1fr;
+  grid-template-columns: 220px 1fr;
   height: 100%;
   padding: 16px 0px;
 `;

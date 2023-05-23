@@ -6,10 +6,12 @@ import { useRef } from "react";
 export default function DashboardPage() {
   const [form, setForm] = useState({ title: "", details: "" });
   const { addDocument } = useFirestore("projects");
+  const formRef = useRef(null);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     addDocument(form);
+    formRef.current.reset();
   };
 
   const titleChangeHandler = (e) => {
@@ -27,7 +29,7 @@ export default function DashboardPage() {
         <h2>Project list</h2>
         <ProjectList></ProjectList>
       </Projects>
-      <Form onSubmit={handleFormSubmit}>
+      <Form ref={formRef} onSubmit={handleFormSubmit}>
         <label htmlFor="title" name="title">
           Project title
         </label>

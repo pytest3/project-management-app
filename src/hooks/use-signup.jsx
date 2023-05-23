@@ -16,8 +16,6 @@ export default function useSignUp() {
         console.log(user);
       })
       .catch((error) => {
-        console.log(error);
-        console.log("dsadasdsad");
         const errorMessage = error.message;
         setError(errorMessage);
       });

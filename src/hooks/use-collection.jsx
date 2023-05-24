@@ -14,9 +14,10 @@ export default function useCollection(collectionName) {
   const [collectionData, setCollectionData] = useState([]);
 
   const collectionRef = collection(db, collectionName);
+  const q = query(collectionRef, orderBy("title"));
 
   const getLiveCollection = useCallback(() => {
-    const unSub = onSnapshot(collectionRef, (snapshot) => {
+    const unSub = onSnapshot(q, (snapshot) => {
       let data = [];
       snapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }));
       setCollectionData(data);

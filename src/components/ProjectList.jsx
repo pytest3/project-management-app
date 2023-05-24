@@ -9,8 +9,6 @@ const ProjectList2 = ({ data }) => {
     return () => unSub();
   }, []);
 
-  console.log("fired here?");
-
   return collectionData.map((item) => (
     <li key={item.id}>
       <div>title: {item.title}</div>

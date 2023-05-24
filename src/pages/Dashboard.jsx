@@ -1,12 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import useFirestore from "../hooks/use-firestore";
 import { useRef } from "react";
+import useCollection from "../hooks/use-collection";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
+import { db } from "../firebase/firebase-config";
 
 export default function DashboardPage() {
   const [form, setForm] = useState({ title: "", details: "" });
   const { addDocument } = useFirestore("projects");
   const formRef = useRef(null);
+  const { collectionData, getLiveCollection } = useCollection("projects");
+
+  useEffect(() => {
+    const unSub = getLiveCollection();
+
+    return () => unSub();
+  }, [getLiveCollection]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();

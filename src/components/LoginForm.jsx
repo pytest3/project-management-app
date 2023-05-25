@@ -1,19 +1,19 @@
-import { useState } from "react";
-import useLogin from "../hooks/use-login";
-import { useContext } from "react";
-import { AuthContext } from "../store/auth-context";
-import { Navigate } from "react-router-dom";
+import { useState } from 'react';
+import useLogin from '../hooks/use-login';
+import { useContext } from 'react';
+import { AuthContext } from '../store/auth-context';
+import { Navigate } from 'react-router-dom';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const { login, error } = useLogin();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     login(email, password);
-    setEmail("");
-    setPassword("");
+    setEmail('');
+    setPassword('');
   };
 
   const { user } = useContext(AuthContext);

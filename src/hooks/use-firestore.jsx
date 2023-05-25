@@ -1,25 +1,25 @@
-import { useEffect, useReducer, useState } from "react";
-import { collection, addDoc, doc } from "firebase/firestore/lite";
-import { db } from "../firebase/firebase-config";
+import { useEffect, useReducer, useState } from 'react';
+import { collection, addDoc } from 'firebase/firestore';
+import { db } from '../firebase/firebase-config';
 
 const reducer = (state, action) => {
-  if (action.type === "ADDED_DOCUMENT") {
+  if (action.type === 'ADDED_DOCUMENT') {
     return {
       isPending: false,
       document: action.payload,
       isError: false,
       isSuccess: true,
     };
-  } else if (action.type === "DELETE") {
+  } else if (action.type === 'DELETE') {
     return;
-  } else if (action.type === "PENDING") {
+  } else if (action.type === 'PENDING') {
     return {
       isPending: true,
       document: null,
       isError: null,
       isSuccess: false,
     };
-  } else if (action.type === "ERROR") {
+  } else if (action.type === 'ERROR') {
     return {
       isPending: false,
       document: null,
@@ -43,13 +43,13 @@ export default function useFirestore(collectionName) {
 
   const addDocument = (document) => {
     dispatch({
-      type: "PENDING",
+      type: 'PENDING',
     });
     addDoc(collectionRef, document)
       .then((docRef) => {
         if (!ignore) {
           dispatch({
-            type: "ADDED_DOCUMENT",
+            type: 'ADDED_DOCUMENT',
             payload: docRef,
           });
 
@@ -58,9 +58,9 @@ export default function useFirestore(collectionName) {
       })
       .catch((e) =>
         dispatch({
-          type: "ERROR",
+          type: 'ERROR',
           payload: e,
-        })
+        }),
       );
   };
 

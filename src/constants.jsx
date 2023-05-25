@@ -3,65 +3,65 @@
 */
 
 export const COLORS = {
-  white: "hsl(0 0% 100%)",
-  offblack: "hsl(24 5% 6%)",
+  white: 'hsl(0, 0%, 100%)',
+  offblack: 'hsl(24 5% 6%)',
   // 50-200: background layers
   // 200-300: borders
   // 400: field borders such as text field, action buttons
   // 700-900: text content
   gray: {
-    50: "hsl(0, 0%, 98%)",
-    100: "hsl(0, 0%, 96%)",
-    200: "hsl(0, 0%, 93%)", // decorative and app framing borders
-    300: "hsl(0, 0%, 88%)", // decorative and app framing borders
-    400: "hsl(0, 0%, 74%)", // field borders such as text field, action buttons
-    500: "hsl(0, 0%, 62%)", // disabled text / icon
-    600: "hsl(0, 0%, 46%)", // control borders (such as in a switch, radio buttons, and a checkbox).
-    700: "hsl(0, 0%, 38%)", // subdued text / icon
-    800: "hsl(0, 0%, 26%)", // text / icon
-    900: "hsl(0, 0%, 13%)", // heading
+    50: 'hsl(0, 0%, 98%)',
+    100: 'hsl(0, 0%, 96%)',
+    200: 'hsl(0, 0%, 93%)', // decorative and app framing borders
+    300: 'hsl(0, 0%, 88%)', // decorative and app framing borders
+    400: 'hsl(0, 0%, 74%)', // field borders such as text field, action buttons
+    500: 'hsl(0, 0%, 62%)', // disabled text / icon
+    600: 'hsl(0, 0%, 46%)', // control borders (such as in a switch, radio buttons, and a checkbox).
+    700: 'hsl(0, 0%, 38%)', // subdued text / icon
+    800: 'hsl(0, 0%, 26%)', // text / icon
+    900: 'hsl(0, 0%, 13%)', // heading
   },
   blueGray: {
-    50: "hsl(204, 15%, 94%)",
-    100: "hsl(198, 16%, 84%)",
-    200: "hsl(200, 15%, 73%)",
-    300: "hsl(200, 16%, 62%)",
-    400: "hsl(200, 15%, 54%)",
-    500: "hsl(200, 18%, 46%)",
-    600: "hsl(199, 18%, 40%)",
-    700: "hsl(199, 18%, 33%)",
-    800: "hsl(200, 18%, 26%)",
-    900: "hsl(200, 19%, 18%)",
+    50: 'hsl(204, 15%, 94%)',
+    100: 'hsl(198, 16%, 84%)',
+    200: 'hsl(200, 15%, 73%)',
+    300: 'hsl(200, 16%, 62%)',
+    400: 'hsl(200, 15%, 54%)',
+    500: 'hsl(200, 18%, 46%)',
+    600: 'hsl(199, 18%, 40%)',
+    700: 'hsl(199, 18%, 33%)',
+    800: 'hsl(200, 18%, 26%)',
+    900: 'hsl(200, 19%, 18%)',
   },
   blue: {
-    50: "hsl(205, 87%, 94%)",
-    100: "hsl(207, 89%, 86%)",
-    200: "hsl(207, 90%, 77%)",
-    300: "hsl(207, 89%, 68%)",
-    400: "hsl(207, 90%, 61%)",
-    500: "hsl(207, 90%, 54%)",
-    600: "hsl(208, 79%, 51%)",
-    700: "hsl(210, 79%, 46%)",
-    800: "hsl(212, 80%, 42%)",
-    900: "hsl(216, 85%, 34%)",
+    50: 'hsl(205, 87%, 94%)',
+    100: 'hsl(207, 89%, 86%)',
+    200: 'hsl(207, 90%, 77%)',
+    300: 'hsl(207, 89%, 68%)',
+    400: 'hsl(207, 90%, 61%)',
+    500: 'hsl(207, 90%, 54%)',
+    600: 'hsl(208, 79%, 51%)',
+    700: 'hsl(210, 79%, 46%)',
+    800: 'hsl(212, 80%, 42%)',
+    900: 'hsl(216, 85%, 34%)',
   },
   green: {
-    50: "hsl(167, 41%, 91%)",
-    100: "hsl(165, 39%, 79%)",
-    200: "hsl(165, 39%, 65%)",
-    300: "hsl(165, 38%, 52%)",
-    400: "hsl(165, 51%, 42%)",
-    500: "hsl(164, 65%, 35%)",
-    600: "hsl(164, 65%, 32%)",
-    700: "hsl(162, 67%, 28%)",
-    800: "hsl(162, 71%, 23%)",
-    900: "hsl(159, 80%, 16%)",
+    50: 'hsl(167, 41%, 91%)',
+    100: 'hsl(165, 39%, 79%)',
+    200: 'hsl(165, 39%, 65%)',
+    300: 'hsl(165, 38%, 52%)',
+    400: 'hsl(165, 51%, 42%)',
+    500: 'hsl(164, 65%, 35%)',
+    600: 'hsl(164, 65%, 32%)',
+    700: 'hsl(162, 67%, 28%)',
+    800: 'hsl(162, 71%, 23%)',
+    900: 'hsl(159, 80%, 16%)',
   },
   red: {
-    300: "hsl(14, 100%, 70%)",
-    500: "hsl(14, 100%, 57%)",
-    700: "hsl(14, 80%, 50%)",
-    900: "hsl(14, 88%, 40%)",
+    300: 'hsl(14, 100%, 70%)',
+    500: 'hsl(14, 100%, 57%)',
+    700: 'hsl(14, 80%, 50%)',
+    900: 'hsl(14, 88%, 40%)',
   },
 };
 
@@ -150,8 +150,8 @@ export const LINE_HEIGHT = {
 */
 
 export const BORDER_RADIUS = {
-  small: "2px",
-  medium: "4px",
-  large: "8px",
-  larger: "16px",
+  small: '2px',
+  medium: '4px',
+  large: '8px',
+  larger: '16px',
 };

@@ -1,7 +1,7 @@
-import { signOut } from "firebase/auth";
-import auth from "../firebase/firebase-config";
-import { useContext, useState } from "react";
-import { AuthContext } from "../store/auth-context";
+import { signOut } from 'firebase/auth';
+import auth from '../firebase/firebase-config';
+import { useContext, useState } from 'react';
+import { AuthContext } from '../store/auth-context';
 
 export default function useLogOut() {
   const [error, setError] = useState();
@@ -13,7 +13,7 @@ export default function useLogOut() {
     setPending(true);
     signOut(auth)
       .then(() => {
-        dispatch({ type: "logout" });
+        dispatch({ type: 'logout' });
       })
       .catch((error) => {
         setError(error.message);

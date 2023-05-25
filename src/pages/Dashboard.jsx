@@ -1,22 +1,23 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import useFirestore from "../hooks/use-firestore";
-import { useRef } from "react";
-import useCollection from "../hooks/use-collection";
-import { collection, getDocs, onSnapshot } from "firebase/firestore";
-import { db } from "../firebase/firebase-config";
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import useFirestore from '../hooks/use-firestore';
+import { useRef } from 'react';
+import useCollection from '../hooks/use-collection';
+import { collection, getDocs, onSnapshot } from 'firebase/firestore';
+import { db } from '../firebase/firebase-config';
+import ProjectList2 from '../components/ProjectList';
 
 export default function DashboardPage() {
-  const [form, setForm] = useState({ title: "", details: "" });
-  const { addDocument } = useFirestore("projects");
+  const [form, setForm] = useState({ title: '', details: '' });
+  const { addDocument } = useFirestore('projects');
   const formRef = useRef(null);
-  const { collectionData, getLiveCollection } = useCollection("projects");
 
-  useEffect(() => {
-    const unSub = getLiveCollection();
-
-    return () => unSub();
-  }, [getLiveCollection]);
+  // useEffect(() => {
+  //   const unSub = getLiveCollection();
+  //   console.log(collectionData);
+  //   console.log("here");
+  //   return () => unSub();
+  // }, [getLiveCollection]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -36,8 +37,10 @@ export default function DashboardPage() {
     <Wrapper>
       <Header>Project dashboard</Header>
       <Projects>
-        <h2>Project list</h2>
-        <ProjectList></ProjectList>
+        <ProjectHeader>Project list</ProjectHeader>
+        <ProjectList>
+          <ProjectList2></ProjectList2>
+        </ProjectList>
       </Projects>
       <Form ref={formRef} onSubmit={handleFormSubmit}>
         <label htmlFor="title" name="title">
@@ -64,17 +67,23 @@ const Header = styled.h1`
   margin-bottom: 32px;
 `;
 
+const ProjectHeader = styled.h2`
+  font-size: 20px;
+`;
+
 const Wrapper = styled.div`
   display: grid;
   grid-template-areas:
-    "title title"
-    "projects form";
+    'title title'
+    'projects form';
   grid-template-columns: 1fr 300px;
+  grid-template-rows: auto;
   gap: 16px;
 `;
 const Form = styled.form`
   display: grid;
   grid-area: form;
+  height: 200px;
 `;
 const ProjectList = styled.ul``;
 const Projects = styled.div`

@@ -1,18 +1,12 @@
-import {
-  collection,
-  getDocs,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
-import { useCallback, useState } from "react";
-import { db } from "../firebase/firebase-config";
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { useCallback, useState } from 'react';
+import { db } from '../firebase/firebase-config';
 
 export default function useCollection(collectionName) {
   const [collectionData, setCollectionData] = useState([]);
 
   const collectionRef = collection(db, collectionName);
-  const q = query(collectionRef, orderBy("title"));
+  const q = query(collectionRef, orderBy('title'));
 
   const getLiveCollection = useCallback(() => {
     const unSub = onSnapshot(q, (snapshot) => {

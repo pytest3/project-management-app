@@ -1,10 +1,10 @@
-import { useState } from "react";
-import useSignUp from "../hooks/use-signup";
+import { useState } from 'react';
+import useSignUp from '../hooks/use-signup';
 
 export default function SignUpForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const { error, pending, signUp } = useSignUp();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { signUp } = useSignUp();
 
   const handleSubmit = (e) => {
     e.preventDefault();

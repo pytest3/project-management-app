@@ -1,8 +1,8 @@
-import { useContext } from "react";
-import { Outlet } from "react-router-dom";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { AuthContext } from "../store/auth-context";
+import { useContext } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import { AuthContext } from '../store/auth-context';
 
 export default function HomePage() {
   const { user } = useContext(AuthContext);
@@ -30,6 +30,7 @@ const Wrapper = styled.div`
   grid-template-columns: 220px 1fr;
   height: 100%;
   padding: 16px 0px;
+  background-color: var(--color-gray-100);
 `;
 const AvatarWrapper = styled(Link)`
   display: grid;

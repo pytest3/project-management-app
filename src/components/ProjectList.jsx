@@ -11,21 +11,20 @@ const ProjectList = ({ data }) => {
   }, []);
 
   return (
-    <ul>
+    <Wrapper>
       {collectionData.map((item) => (
         <Project key={item.id}>
           <input type="checkbox" id="done" /> {item.title}
         </Project>
       ))}
-    </ul>
+    </Wrapper>
   );
 };
-
+const Wrapper = styled.ul``;
 const Project = styled.article`
   margin-bottom: var(--space-2);
   color: var(--color-blueGray-800);
   display: flex;
-  gap: var(--space-1);
 `;
 
 export default memo(ProjectList);

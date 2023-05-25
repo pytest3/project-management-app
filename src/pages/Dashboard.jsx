@@ -5,7 +5,7 @@ import { useRef } from 'react';
 import useCollection from '../hooks/use-collection';
 import { collection, getDocs, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase/firebase-config';
-import ProjectList2 from '../components/ProjectList';
+import ProjectList from '../components/ProjectList';
 
 export default function DashboardPage() {
   const [form, setForm] = useState({ title: '', details: '' });
@@ -38,37 +38,68 @@ export default function DashboardPage() {
       <Header>Project dashboard</Header>
       <Projects>
         <ProjectHeader>Project list</ProjectHeader>
-        <ProjectList>
-          <ProjectList2></ProjectList2>
-        </ProjectList>
+        <ProjectList />
       </Projects>
       <Form ref={formRef} onSubmit={handleFormSubmit}>
-        <label htmlFor="title" name="title">
-          Project title
-        </label>
-        <input type="text" id="title" onChange={titleChangeHandler}></input>
-        <label htmlFor="title" name="title">
-          Details
-        </label>
-        <textarea
-          rows="4"
-          cols="50"
-          id="details"
-          onChange={detailsChangeHandler}
-        ></textarea>
-        <button>Add</button>
+        <CreateProject>
+          <CreateProjectHeader>Create Project</CreateProjectHeader>
+          <StyledLabel htmlFor="title" name="title">
+            Project title
+          </StyledLabel>
+          <input type="text" id="title" onChange={titleChangeHandler}></input>
+          <StyledLabel htmlFor="title" name="title">
+            Details
+          </StyledLabel>
+          <textarea
+            rows="4"
+            cols="50"
+            id="details"
+            onChange={detailsChangeHandler}
+          ></textarea>
+          <StyledButton>Add</StyledButton>
+        </CreateProject>
       </Form>
     </Wrapper>
   );
 }
 
+const StyledButton = styled.button`
+  margin-top: var(--space-3);
+`;
+
+const StyledLabel = styled.h2`
+  font-size: var(--font-size-2);
+  margin-bottom: var(--space-1);
+  color: var(--color-blueGray-400);
+
+  &:not(:first-of-type) {
+    margin-top: var(--space-1);
+  }
+`;
+
+const CreateProjectHeader = styled.h1`
+  font-size: var(--font-size-5);
+  margin-bottom: var(--space-4);
+  color: var(--color-blueGray-800);
+  font-weight: var(--font-weight-medium);
+`;
+
+const CreateProject = styled.div`
+  display: grid;
+`;
+
 const Header = styled.h1`
   grid-area: title;
-  margin-bottom: 32px;
+  margin-bottom: var(--space-5);
+  color: var(--color-blueGray-400);
+  /* margin-bottom: 20px; */
 `;
 
 const ProjectHeader = styled.h2`
-  font-size: 20px;
+  font-size: var(--font-size-4);
+  margin-bottom: var(--space-5);
+  color: var(--color-blueGray-800);
+  font-weight: var(--font-weight-medium);
 `;
 
 const Wrapper = styled.div`
@@ -85,7 +116,7 @@ const Form = styled.form`
   grid-area: form;
   height: 200px;
 `;
-const ProjectList = styled.ul``;
+
 const Projects = styled.div`
   grid-area: projects;
 `;

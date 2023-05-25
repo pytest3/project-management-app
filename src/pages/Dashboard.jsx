@@ -1,10 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import useFirestore from '../hooks/use-firestore';
 import { useRef } from 'react';
-import useCollection from '../hooks/use-collection';
-import { collection, getDocs, onSnapshot } from 'firebase/firestore';
-import { db } from '../firebase/firebase-config';
+
 import ProjectList from '../components/ProjectList';
 
 export default function DashboardPage() {

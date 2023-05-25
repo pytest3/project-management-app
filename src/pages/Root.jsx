@@ -1,9 +1,6 @@
-import { Outlet, useNavigate, Navigate } from "react-router-dom";
-import NavBar from "../components/Navbar";
-import { useContext, useEffect } from "react";
-import { AuthContext } from "../store/auth-context";
-import Home from "./Home";
-import styled from "styled-components";
+import { Outlet } from 'react-router-dom';
+import NavBar from '../components/Navbar';
+import styled from 'styled-components';
 
 export default function Root() {
   return (
@@ -20,8 +17,8 @@ const Wrapper = styled.div`
   height: 100%;
   display: grid;
   grid-template-areas:
-    "nav"
-    "main";
+    'nav'
+    'main';
   grid-template-rows: auto 1fr;
 `;
 

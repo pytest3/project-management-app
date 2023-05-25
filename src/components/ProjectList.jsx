@@ -2,7 +2,7 @@ import { useEffect, memo } from 'react';
 import useCollection from '../hooks/use-collection';
 import styled from 'styled-components';
 
-const ProjectList = ({ data }) => {
+const ProjectList = () => {
   const { collectionData, getLiveCollection } = useCollection('projects');
 
   useEffect(() => {

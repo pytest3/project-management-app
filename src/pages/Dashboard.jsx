@@ -35,13 +35,13 @@ export default function DashboardPage() {
 
   return (
     <Wrapper>
-      <Header>Project dashboard</Header>
+      <PageHeader>Dashboard</PageHeader>
       <Projects>
         <ProjectHeader>Project list</ProjectHeader>
         <ProjectList />
       </Projects>
-      <Form ref={formRef} onSubmit={handleFormSubmit}>
-        <CreateProject>
+      <CreateProject>
+        <Form ref={formRef} onSubmit={handleFormSubmit}>
           <CreateProjectHeader>Create Project</CreateProjectHeader>
           <StyledLabel htmlFor="title" name="title">
             Project title
@@ -57,8 +57,8 @@ export default function DashboardPage() {
             onChange={detailsChangeHandler}
           ></textarea>
           <StyledButton>Add</StyledButton>
-        </CreateProject>
-      </Form>
+        </Form>
+      </CreateProject>
     </Wrapper>
   );
 }
@@ -82,24 +82,35 @@ const CreateProjectHeader = styled.h1`
   margin-bottom: var(--space-4);
   color: var(--color-blueGray-800);
   font-weight: var(--font-weight-medium);
+  line-height: 1;
 `;
 
 const CreateProject = styled.div`
-  display: grid;
+  margin-left: var(--space-5);
+  background-color: var(--color-white);
+  padding: var(--space-5);
+  border-radius: var(--border-radius-large);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  height: 300px;
+  width: 500px;
 `;
 
-const Header = styled.h1`
+const PageHeader = styled.h1`
   grid-area: title;
+  line-height: 1;
   margin-bottom: var(--space-5);
+  padding-bottom: var(--space-4);
   color: var(--color-blueGray-400);
-  /* margin-bottom: 20px; */
+  font-size: var(--font-size-7);
+  border-bottom: 1px solid var(--color-blueGray-100);
 `;
 
 const ProjectHeader = styled.h2`
-  font-size: var(--font-size-4);
-  margin-bottom: var(--space-5);
+  font-size: var(--font-size-5);
+  margin-bottom: var(--space-4);
   color: var(--color-blueGray-800);
   font-weight: var(--font-weight-medium);
+  line-height: 1;
 `;
 
 const Wrapper = styled.div`
@@ -107,16 +118,21 @@ const Wrapper = styled.div`
   grid-template-areas:
     'title title'
     'projects form';
-  grid-template-columns: 1fr 300px;
+  grid-template-columns: auto 1fr;
   grid-template-rows: auto;
-  gap: 16px;
 `;
 const Form = styled.form`
   display: grid;
   grid-area: form;
-  height: 200px;
+  height: 100%;
 `;
 
 const Projects = styled.div`
   grid-area: projects;
+  padding-right: var(--space-5);
+  /* justify-self: start; */
+  background-color: var(--color-white);
+  padding: var(--space-5);
+  border-radius: var(--border-radius-large);
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;

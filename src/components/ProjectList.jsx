@@ -1,14 +1,9 @@
-import { useEffect, memo } from 'react';
+import { memo } from 'react';
 import useCollection from '../hooks/use-collection';
 import styled from 'styled-components';
 
 const ProjectList = () => {
-  const { collectionData, getLiveCollection } = useCollection('projects');
-
-  useEffect(() => {
-    const unSub = getLiveCollection();
-    return () => unSub();
-  }, []);
+  const { collectionData } = useCollection('projects');
 
   return (
     <Wrapper>

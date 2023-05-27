@@ -1,5 +1,5 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { useCallback, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { db } from '../firebase/firebase-config';
 
 export default function useCollection(collectionName) {
@@ -8,15 +8,15 @@ export default function useCollection(collectionName) {
   const collectionRef = collection(db, collectionName);
   const q = query(collectionRef, orderBy('title'));
 
-  const getLiveCollection = useCallback(() => {
+  useEffect(() => {
     const unSub = onSnapshot(q, (snapshot) => {
+      console.log('ran');
       let data = [];
       snapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }));
       setCollectionData(data);
     });
+    return () => unSub();
+  }, [collectionName]);
 
-    return unSub;
-  }, []);
-
-  return { collectionData, getLiveCollection };
+  return { collectionData };
 }

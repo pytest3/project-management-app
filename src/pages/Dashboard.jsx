@@ -11,6 +11,7 @@ export default function DashboardPage() {
     details: '',
     isComplete: false,
   });
+  const [showActive, setShowActive] = useState(false);
   const { addDocument } = useFirestore('projects');
   const formRef = useRef(null);
 
@@ -39,8 +40,17 @@ export default function DashboardPage() {
     <Wrapper>
       <PageHeader>Dashboard</PageHeader>
       <Projects>
-        <ProjectHeader>Project list</ProjectHeader>
-        <ProjectList showActive={false} />
+        <ProjectHeader>
+          <Title>Project list</Title>
+          <label>
+            <input
+              type="checkbox"
+              onClick={() => setShowActive(!showActive)}
+            ></input>
+            Only show active
+          </label>
+        </ProjectHeader>
+        <ProjectList showActive={showActive} />
       </Projects>
       <CreateProject>
         <Form ref={formRef} onSubmit={handleFormSubmit}>
@@ -108,8 +118,13 @@ const PageHeader = styled.h1`
 `;
 
 const ProjectHeader = styled.h2`
-  font-size: var(--font-size-5);
   margin-bottom: var(--space-4);
+  display: flex;
+  justify-content: space-between;
+`;
+
+const Title = styled.div`
+  font-size: var(--font-size-5);
   color: var(--color-blueGray-800);
   font-weight: var(--font-weight-medium);
   line-height: 1;
@@ -137,4 +152,5 @@ const Projects = styled.div`
   padding: var(--space-5);
   border-radius: var(--border-radius-large);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  min-width: 300px;
 `;

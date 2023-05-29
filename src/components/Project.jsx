@@ -12,7 +12,12 @@ export default function Project({ item }) {
   return (
     <Wrapper key={item.id} isComplete={isComplete}>
       <label>
-        <input type="checkbox" id="checkbox" onClick={clickHandler} />
+        <input
+          type="checkbox"
+          id="checkbox"
+          onClick={clickHandler}
+          defaultChecked={isComplete}
+        />
         {item.title}
       </label>
     </Wrapper>

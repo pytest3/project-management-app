@@ -6,7 +6,11 @@ import { useRef } from 'react';
 import ProjectList from '../components/ProjectList';
 
 export default function DashboardPage() {
-  const [form, setForm] = useState({ title: '', details: '' });
+  const [form, setForm] = useState({
+    title: '',
+    details: '',
+    completed: false,
+  });
   const { addDocument } = useFirestore('projects');
   const formRef = useRef(null);
 

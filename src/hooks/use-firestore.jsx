@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
-import { collection, addDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, updateDoc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase-config';
 
 const reducer = (state, action) => {
@@ -68,6 +68,14 @@ export default function useFirestore(collectionName) {
     return;
   };
 
+  const editDocument = (id, data) => {
+    const docRef = doc(db, collectionName, id);
+    updateDoc(docRef, data)
+      .then(() => console.log('Updated'))
+      .catch((error) => console.log(error));
+    return;
+  };
+
   // the below seEffect runs when component unmounts to prevent
   // state from being set (dispatch) when the promise returned from the
   // aync addDoc function resolves successfully
@@ -75,5 +83,5 @@ export default function useFirestore(collectionName) {
     setIgnore(true);
   }, []);
 
-  return { addDocument, deleteDocument, state };
+  return { addDocument, deleteDocument, editDocument, state };
 }

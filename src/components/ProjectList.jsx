@@ -1,25 +1,23 @@
 import { memo } from 'react';
 import useCollection from '../hooks/use-collection';
 import styled from 'styled-components';
+import Project from './Project';
 
-const ProjectList = () => {
+const ProjectList = ({ showActive }) => {
   const { collectionData } = useCollection('projects');
+
+  const projects = showActive
+    ? collectionData.filter((i) => i.isComplete === false)
+    : collectionData;
 
   return (
     <Wrapper>
-      {collectionData.map((item) => (
-        <Project key={item.id}>
-          <input type="checkbox" id="done" /> {item.title}
-        </Project>
+      {projects.map((item) => (
+        <Project key={item.id} item={item}></Project>
       ))}
     </Wrapper>
   );
 };
 const Wrapper = styled.ul``;
-const Project = styled.article`
-  margin-bottom: var(--space-2);
-  color: var(--color-blueGray-800);
-  display: flex;
-`;
 
 export default memo(ProjectList);

@@ -9,12 +9,12 @@ export default function DashboardPage() {
   const [form, setForm] = useState({
     title: '',
     details: '',
-    completed: false,
+    isComplete: false,
   });
   const { addDocument } = useFirestore('projects');
   const formRef = useRef(null);
 
-  // useEffect(() => {
+  // useEffect(() => {`
   //   const unSub = getLiveCollection();
   //   console.log(collectionData);
   //   console.log("here");
@@ -40,7 +40,7 @@ export default function DashboardPage() {
       <PageHeader>Dashboard</PageHeader>
       <Projects>
         <ProjectHeader>Project list</ProjectHeader>
-        <ProjectList />
+        <ProjectList showActive={false} />
       </Projects>
       <CreateProject>
         <Form ref={formRef} onSubmit={handleFormSubmit}>

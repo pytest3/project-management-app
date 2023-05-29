@@ -9,14 +9,24 @@ export default function useCollection(collectionName) {
   const q = query(collectionRef, orderBy('title'));
 
   useEffect(() => {
-    const unSub = onSnapshot(q, (snapshot) => {
-      let data = [];
-      snapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }));
-      setCollectionData(data);
-      console.log('refreshed');
-    });
+    const unSub = onSnapshot(
+      q,
+      (snapshot) => {
+        let data = [];
+        snapshot.forEach((doc) => {
+          console.log(doc.uid);
+          data.push({ id: doc.id, ...doc.data() });
+        });
+        setCollectionData(data);
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
     return () => unSub();
   }, [collectionName]);
+
+  console.log('1');
 
   return { collectionData };
 }

@@ -6,7 +6,6 @@ import { AuthContext } from '../store/auth-context';
 
 export default function HomePage() {
   const { user } = useContext(AuthContext);
-  console.log(user);
 
   return (
     <Wrapper>

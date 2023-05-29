@@ -1,6 +1,6 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useState } from "react";
-import auth from "../firebase/firebase-config";
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { useState } from 'react';
+import auth from '../firebase/firebase-config';
 
 export default function useSignUp() {
   const [error, setError] = useState();
@@ -13,7 +13,6 @@ export default function useSignUp() {
       .then((userCredential) => {
         const user = userCredential.user;
         setUser(user);
-        console.log(user);
       })
       .catch((error) => {
         const errorMessage = error.message;

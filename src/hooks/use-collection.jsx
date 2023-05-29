@@ -10,10 +10,10 @@ export default function useCollection(collectionName) {
 
   useEffect(() => {
     const unSub = onSnapshot(q, (snapshot) => {
-      console.log('ran');
       let data = [];
       snapshot.forEach((doc) => data.push({ id: doc.id, ...doc.data() }));
       setCollectionData(data);
+      console.log('refreshed');
     });
     return () => unSub();
   }, [collectionName]);

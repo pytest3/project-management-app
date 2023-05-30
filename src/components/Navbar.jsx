@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import useLogOut from "../hooks/use-logout";
-import { AuthContext } from "../store/auth-context";
-import { useContext } from "react";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+import useLogOut from '../hooks/use-logout';
+import { AuthContext } from '../store/auth-context';
+import { useContext } from 'react';
 
 export default function NavBar() {
   const { logOut } = useLogOut();
@@ -34,6 +34,7 @@ const Wrapper = styled.nav`
   background-color: hsl(210, 29%, 97%);
   padding: 4px 8px;
   grid-area: nav;
+  width: 100%;
 `;
 
 const NavbarActions = styled.div`

@@ -1,20 +1,35 @@
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import {
+  collection,
+  onSnapshot,
+  // orderBy,
+  query,
+  where,
+} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../firebase/firebase-config';
 
-export default function useCollection(collectionName) {
+export default function useCollection(collectionName, queryParams) {
   const [collectionData, setCollectionData] = useState([]);
 
   const collectionRef = collection(db, collectionName);
-  const q = query(collectionRef, orderBy('title'));
+  let queryRef = query(collectionRef);
+
+  if (queryParams) {
+    queryRef = query(
+      collectionRef,
+      // orderBy('title'),
+      // where('userId', '==', user.uid),
+      where(...queryParams),
+    );
+  }
 
   useEffect(() => {
     const unSub = onSnapshot(
-      q,
+      queryRef,
       (snapshot) => {
         let data = [];
         snapshot.forEach((doc) => {
-          console.log(doc.uid);
+          console.log(doc.data());
           data.push({ id: doc.id, ...doc.data() });
         });
         setCollectionData(data);
@@ -25,8 +40,6 @@ export default function useCollection(collectionName) {
     );
     return () => unSub();
   }, [collectionName]);
-
-  console.log('1');
 
   return { collectionData };
 }

@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import { AuthContext } from '../store/auth-context';
 
 export default function HomePage() {
-  const { user } = useContext(AuthContext);
-
   return (
     <Wrapper>
       <Sidebar>

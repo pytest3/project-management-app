@@ -61,6 +61,7 @@ const LogoutIcon = styled(HomeIcon)``;
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: 60px 1fr;
+  width: 100%;
   height: 100%;
   padding: 16px 0px;
   background-color: var(--color-gray-100);

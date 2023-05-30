@@ -15,13 +15,16 @@ export default function Root() {
 
 const Wrapper = styled.div`
   height: 100%;
+  width: 100%;
   display: grid;
   grid-template-areas:
     'nav'
     'main';
   grid-template-rows: auto 1fr;
+  position: relative;
 `;
 
 const OutletWrapper = styled.div`
   grid-area: main;
+  width: 100%;
 `;

@@ -6,7 +6,6 @@ import { AuthContext } from '../store/auth-context';
 
 const ProjectList = ({ showActive }) => {
   const { user } = useContext(AuthContext);
-  console.log('here');
   const { collectionData } = useCollection('projects', [
     'userId',
     '==',
@@ -17,7 +16,6 @@ const ProjectList = ({ showActive }) => {
     ? collectionData.filter((i) => i.isComplete === false)
     : collectionData;
 
-  console.log('2');
   return (
     <Wrapper>
       {projects.map((item) => (

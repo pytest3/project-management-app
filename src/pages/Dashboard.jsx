@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import useFirestore from '../hooks/use-firestore';
 import { useRef } from 'react';
 
 import ProjectList from '../components/ProjectList';
+import { AuthContext } from '../store/auth-context';
 
 export default function DashboardPage() {
   const [form, setForm] = useState({
     title: '',
     details: '',
     isComplete: false,
+    userId: '',
   });
   const [showActive, setShowActive] = useState(false);
   const { addDocument } = useFirestore('projects');
@@ -22,6 +24,8 @@ export default function DashboardPage() {
   //   return () => unSub();
   // }, [getLiveCollection]);
 
+  const { user } = useContext(AuthContext);
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
     addDocument(form);
@@ -29,11 +33,11 @@ export default function DashboardPage() {
   };
 
   const titleChangeHandler = (e) => {
-    setForm({ ...form, title: e.target.value });
+    setForm({ ...form, title: e.target.value, userId: user.uid });
   };
 
   const detailsChangeHandler = (e) => {
-    setForm({ ...form, details: e.target.value });
+    setForm({ ...form, details: e.target.value, userId: user.uid });
   };
 
   return (

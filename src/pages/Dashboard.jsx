@@ -5,6 +5,7 @@ import { useRef } from 'react';
 
 import ProjectList from '../components/ProjectList';
 import { AuthContext } from '../store/auth-context';
+import Lists from '../components/Lists';
 
 export default function DashboardPage() {
   const [form, setForm] = useState({
@@ -56,6 +57,9 @@ export default function DashboardPage() {
         </ProjectHeader>
         <ProjectList showActive={showActive} />
       </Projects>
+      <SideBar>
+        <Lists />
+      </SideBar>
       <CreateProject>
         <Form ref={formRef} onSubmit={handleFormSubmit}>
           <CreateProjectHeader>Create Project</CreateProjectHeader>
@@ -78,6 +82,8 @@ export default function DashboardPage() {
     </Wrapper>
   );
 }
+
+const SideBar = styled.aside``;
 
 const StyledButton = styled.button`
   margin-top: var(--space-3);
@@ -135,13 +141,15 @@ const Title = styled.div`
 `;
 
 const Wrapper = styled.div`
+  width: 100%;
   display: grid;
   grid-template-areas:
-    'title title'
-    'projects form';
-  grid-template-columns: auto 1fr;
+    'title title title'
+    'sidebar projects form';
+  grid-template-columns: 200px auto 1fr;
   grid-template-rows: auto;
 `;
+
 const Form = styled.form`
   display: grid;
   grid-area: form;

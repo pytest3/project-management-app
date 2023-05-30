@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from 'react';
-import { collection, addDoc, doc, updateDoc, getDoc } from 'firebase/firestore';
+import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../firebase/firebase-config';
 
 const reducer = (state, action) => {

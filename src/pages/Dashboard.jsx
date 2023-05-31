@@ -17,7 +17,7 @@ export default function DashboardPage() {
   const [showActive, setShowActive] = useState(false);
   const { addDocument } = useFirestore('projects');
   const formRef = useRef(null);
-
+  /* hi */
   // useEffect(() => {`
   //   const unSub = getLiveCollection();
   //   console.log(collectionData);
@@ -44,6 +44,10 @@ export default function DashboardPage() {
   return (
     <Wrapper>
       <PageHeader>Dashboard</PageHeader>
+      <SideBar>
+        <Lists />
+      </SideBar>
+
       <Projects>
         <ProjectHeader>
           <Title>Project list</Title>
@@ -57,9 +61,7 @@ export default function DashboardPage() {
         </ProjectHeader>
         <ProjectList showActive={showActive} />
       </Projects>
-      <SideBar>
-        <Lists />
-      </SideBar>
+
       <CreateProject>
         <Form ref={formRef} onSubmit={handleFormSubmit}>
           <CreateProjectHeader>Create Project</CreateProjectHeader>
@@ -83,7 +85,11 @@ export default function DashboardPage() {
   );
 }
 
-const SideBar = styled.aside``;
+const SideBar = styled.aside`
+  border-right: 1px solid var(--color-blueGray-100);
+  padding-right: var(--space-5);
+  grid-area: sidebar;
+`;
 
 const StyledButton = styled.button`
   margin-top: var(--space-3);
@@ -114,7 +120,6 @@ const CreateProject = styled.div`
   border-radius: var(--border-radius-large);
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
   height: 300px;
-  width: 500px;
 `;
 
 const PageHeader = styled.h1`
@@ -142,12 +147,13 @@ const Title = styled.div`
 
 const Wrapper = styled.div`
   width: 100%;
+  height: 100%;
   display: grid;
   grid-template-areas:
     'title title title'
     'sidebar projects form';
-  grid-template-columns: 200px auto 1fr;
-  grid-template-rows: auto;
+  grid-template-columns: 250px 250px 1fr;
+  grid-template-rows: auto 1fr;
 `;
 
 const Form = styled.form`
@@ -160,9 +166,8 @@ const Projects = styled.div`
   grid-area: projects;
   padding-right: var(--space-5);
   /* justify-self: start; */
-  background-color: var(--color-white);
+  /* background-color: var(--color-white); */
   padding: var(--space-5);
   border-radius: var(--border-radius-large);
-  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
-  min-width: 300px;
+  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
 `;

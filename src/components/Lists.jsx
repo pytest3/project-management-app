@@ -36,7 +36,10 @@ export default function Lists() {
   return (
     <Wrapper>
       {showAddForm && (
-        <Modal closeForm={handleCloseForm} privateForm={isPrivateForm}></Modal>
+        <Modal
+          closeForm={handleCloseForm}
+          isPrivateForm={isPrivateForm}
+        ></Modal>
       )}
       <PrivateListWrapper>
         <HeaderWrapper>

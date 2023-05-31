@@ -3,15 +3,20 @@ import styled from 'styled-components';
 import useFirestore from '../hooks/use-firestore';
 import { AuthContext } from '../store/auth-context';
 
-export default function Modal({ closeForm }) {
+export default function Modal({ closeForm, isPrivateForm }) {
   const [name, setName] = useState('');
-  const { addDocument } = useFirestore('private lists');
+  const { addDocument: addPrivateDocument } = useFirestore('private lists');
+  const { addDocument: addPublicDocument } = useFirestore('public lists');
   const { user } = useContext(AuthContext);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
     closeForm();
-    addDocument({ title: name, userId: user.uid });
+    if (isPrivateForm) {
+      addPrivateDocument({ title: name, userId: user.uid });
+    } else {
+      addPublicDocument({ title: name, userId: user.uid });
+    }
   };
 
   return (
@@ -23,7 +28,6 @@ export default function Modal({ closeForm }) {
           id="listName"
           type="text"
           onChange={(e) => setName(e.target.value)}
-          value={name}
           placeholder="Name"
         ></input>
         <FormActions>

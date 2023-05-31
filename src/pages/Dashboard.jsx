@@ -1,12 +1,10 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
 import useFirestore from '../hooks/use-firestore';
-import { useRef } from 'react';
 
-import ProjectList from '../components/ProjectList';
-import { AuthContext } from '../store/auth-context';
+import ListItems from '../components/ListItems';
 import Lists from '../components/Lists';
-
+import { AuthContext } from '../store/auth-context';
 export default function DashboardPage() {
   const [form, setForm] = useState({
     title: '',
@@ -14,17 +12,11 @@ export default function DashboardPage() {
     isComplete: false,
     userId: '',
   });
-  const [showActive, setShowActive] = useState(false);
+
+  const [title, setTitle] = useState('');
   const { addDocument } = useFirestore('projects');
   const formRef = useRef(null);
-  /* hi */
-  // useEffect(() => {`
-  //   const unSub = getLiveCollection();
-  //   console.log(collectionData);
-  //   console.log("here");
-  //   return () => unSub();
-  // }, [getLiveCollection]);
-
+  const [showActive, setShowActive] = useState(false);
   const { user } = useContext(AuthContext);
 
   const handleFormSubmit = (e) => {
@@ -41,14 +33,34 @@ export default function DashboardPage() {
     setForm({ ...form, details: e.target.value, userId: user.uid });
   };
 
+  const handleListClick = (item) => {
+    console.log(item);
+    setTitle(item.title);
+
+    addDocument();
+  };
+
   return (
     <Wrapper>
       <PageHeader>Dashboard</PageHeader>
       <SideBar>
-        <Lists />
+        <Lists handleListClick={handleListClick} />
       </SideBar>
+      <ListDetails>
+        <Title>{title}</Title>
+        <label></label>
+        <input type="text"></input>
+        <label>
+          <input
+            type="checkbox"
+            onClick={() => setShowActive(!showActive)}
+          ></input>
+          Only show active
+        </label>
+        <ListItems showActive={showActive} />
+      </ListDetails>
 
-      <Projects>
+      {/* <Projects>
         <ProjectHeader>
           <Title>Project list</Title>
           <label>
@@ -60,7 +72,7 @@ export default function DashboardPage() {
           </label>
         </ProjectHeader>
         <ProjectList showActive={showActive} />
-      </Projects>
+      </Projects> */}
 
       <CreateProject>
         <Form ref={formRef} onSubmit={handleFormSubmit}>
@@ -84,6 +96,25 @@ export default function DashboardPage() {
     </Wrapper>
   );
 }
+const ListDetails = styled.div`
+  grid-area: projects;
+  padding-right: var(--space-5);
+  /* justify-self: start; */
+  /* background-color: var(--color-white); */
+  padding: 0 var(--space-5);
+  border-radius: var(--border-radius-large);
+  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
+`;
+
+const Projects = styled.div`
+  grid-area: projects;
+  padding-right: var(--space-5);
+  /* justify-self: start; */
+  /* background-color: var(--color-white); */
+  padding: var(--space-5);
+  border-radius: var(--border-radius-large);
+  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
+`;
 
 const SideBar = styled.aside`
   border-right: 1px solid var(--color-blueGray-100);
@@ -160,14 +191,4 @@ const Form = styled.form`
   display: grid;
   grid-area: form;
   height: 100%;
-`;
-
-const Projects = styled.div`
-  grid-area: projects;
-  padding-right: var(--space-5);
-  /* justify-self: start; */
-  /* background-color: var(--color-white); */
-  padding: var(--space-5);
-  border-radius: var(--border-radius-large);
-  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
 `;

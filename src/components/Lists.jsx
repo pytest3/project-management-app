@@ -8,19 +8,25 @@ import { AuthContext } from '../store/auth-context';
 
 export default function Lists() {
   const [showAddForm, setShowAddForm] = useState(false);
+  const [isPrivateForm, setIsPrivateForm] = useState(false);
   const { user } = useContext(AuthContext);
-  console.log(user.uid);
 
-  const { collectionData } = useCollection('private lists', [
-    'userId',
-    '==',
-    user.uid,
-  ]);
+  const { collectionData: privateCollectionData } = useCollection(
+    'private lists',
+    ['userId', '==', user.uid],
+  );
 
-  console.log(collectionData);
+  const { collectionData: publicCollectionData } =
+    useCollection('public lists');
+
+  console.log(privateCollectionData);
 
   const handleOpenForm = () => {
     setShowAddForm(true);
+  };
+  const handleOpenPrivateForm = () => {
+    setShowAddForm(true);
+    setIsPrivateForm(true);
   };
 
   const handleCloseForm = () => {
@@ -29,7 +35,9 @@ export default function Lists() {
 
   return (
     <Wrapper>
-      {showAddForm && <Modal closeForm={handleCloseForm}></Modal>}
+      {showAddForm && (
+        <Modal closeForm={handleCloseForm} privateForm={isPrivateForm}></Modal>
+      )}
       <PrivateListWrapper>
         <HeaderWrapper>
           <HeaderText>Private lists</HeaderText>
@@ -38,13 +46,13 @@ export default function Lists() {
             height="48"
             viewBox="0 -960 960 960"
             width="48"
-            onClick={handleOpenForm}
+            onClick={handleOpenPrivateForm}
           >
             <path d="M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" />
           </AddButton>
         </HeaderWrapper>
         <List>
-          {collectionData.map((i) => (
+          {privateCollectionData.map((i) => (
             <PrivateListItem key={i.id}>{i.title}</PrivateListItem>
           ))}
         </List>
@@ -63,8 +71,9 @@ export default function Lists() {
           </AddButton>
         </HeaderWrapper>
         <List>
-          <PublicListItem>House chores</PublicListItem>
-          <PublicListItem>Claire things</PublicListItem>
+          {publicCollectionData.map((i) => (
+            <PublicListItem key={i.id}>{i.title}</PublicListItem>
+          ))}
         </List>
       </PublicListWrapper>
     </Wrapper>

@@ -41,6 +41,17 @@ export default function useFirestore(collectionName) {
   const [ignore, setIgnore] = useState(null);
   const collectionRef = collection(db, collectionName);
 
+  const addNestedDocument = (docId, nestedCollectionName, nestedDocument) => {
+    dispatch({ type: 'PENDING' });
+    const collectionRef = collection(collectionRef, {
+      docId,
+      nestedCollectionName,
+    });
+    addDoc(collectionRef, { nestedDocument })
+      .then(() => dispatch({ type: 'SUCCESS' }))
+      .catch((err) => dispatch({ type: 'ERROR', payload: err }));
+  };
+
   const addDocument = (document) => {
     dispatch({
       type: 'PENDING',
@@ -48,11 +59,11 @@ export default function useFirestore(collectionName) {
     addDoc(collectionRef, document)
       .then((docRef) => {
         if (!ignore) {
+          console.log('ignored');
           dispatch({
             type: 'ADDED_DOCUMENT',
             payload: docRef,
           });
-
           // reset form here too i guess
         }
       })
@@ -80,8 +91,15 @@ export default function useFirestore(collectionName) {
   // state from being set (dispatch) when the promise returned from the
   // aync addDoc function resolves successfully
   useEffect(() => {
+    console.log('effect ran');
     setIgnore(true);
   }, []);
 
-  return { addDocument, deleteDocument, editDocument, state };
+  return {
+    addDocument,
+    addNestedDocument,
+    deleteDocument,
+    editDocument,
+    state,
+  };
 }

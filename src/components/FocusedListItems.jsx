@@ -1,15 +1,10 @@
-import { memo, useContext } from 'react';
+import { memo } from 'react';
 import useCollection from '../hooks/use-collection';
 import styled from 'styled-components';
-import Project from './Project';
-import { AuthContext } from '../store/auth-context';
-import { collection } from 'firebase/firestore';
-import { db } from '../firebase/firebase-config';
+import FocusedListItem from './FocusedListItem';
 
 const FocusedListItems = ({ clickedDoc, showActive }) => {
-  const { user } = useContext(AuthContext);
-
-  const { id, userId, title } = clickedDoc;
+  const { id, title, isPrivate } = clickedDoc;
 
   // const { collectionData } = useCollection('projects', [
   //   'userId',
@@ -17,7 +12,9 @@ const FocusedListItems = ({ clickedDoc, showActive }) => {
   //   user.uid,
   // ]);
 
-  const { collectionData } = useCollection(`public lists/${id}/${title}`);
+  const { collectionData } = useCollection(
+    `${isPrivate ? 'public lists' : 'public lists'}/${id}/${title}`,
+  );
 
   // const nestedCollectionTitle = title;
 
@@ -29,14 +26,14 @@ const FocusedListItems = ({ clickedDoc, showActive }) => {
   // console.log(colRef2);
   // // onSnapShot(colRef, (snapshot)=>{}, (error)=>{})
 
-  const projects = showActive
+  const filteredCollectionData = showActive
     ? collectionData.filter((i) => i.isComplete === false)
     : collectionData;
 
   return (
     <Wrapper>
-      {projects.map((item) => (
-        <Project key={item.id} item={item}></Project>
+      {filteredCollectionData.map((item) => (
+        <FocusedListItem key={item.id} item={item}></FocusedListItem>
       ))}
     </Wrapper>
   );

@@ -1,9 +1,9 @@
-import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useReducer } from 'react';
 import { db } from '../firebase/firebase-config';
 
 const reducer = (state, action) => {
-  if (action.type === 'ADDED_DOCUMENT') {
+  if (action.type === 'SUCCESS') {
     return {
       isPending: false,
       document: action.payload,
@@ -40,15 +40,16 @@ export default function useFirestore(collectionPath) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const collectionRef = collection(db, collectionPath);
 
-  const addNestedDocument = (docId, nestedCollectionName, nestedDocument) => {
-    dispatch({ type: 'PENDING' });
-    const collectionRef = collection(collectionRef, {
-      docId,
-      nestedCollectionName,
+  const getDocument = (documentId) => {
+    const docRef = doc(db, collectionPath, documentId);
+    dispatch({
+      type: 'PENDING',
     });
-    addDoc(collectionRef, { nestedDocument })
-      .then(() => dispatch({ type: 'SUCCESS' }))
-      .catch((err) => dispatch({ type: 'ERROR', payload: err }));
+    getDoc(docRef)
+      .then((docSnap) => dispatch({ type: 'SUCCESS', payload: docSnap.doc() }))
+      .then((err) => {
+        dispatch({ type: 'ERROR', payload: err });
+      });
   };
 
   const addDocument = (document) => {
@@ -58,7 +59,7 @@ export default function useFirestore(collectionPath) {
     addDoc(collectionRef, document)
       .then((docRef) => {
         dispatch({
-          type: 'ADDED_DOCUMENT',
+          type: 'SUCCESS',
           payload: docRef,
         });
         // reset form here too i guess
@@ -89,7 +90,7 @@ export default function useFirestore(collectionPath) {
 
   return {
     addDocument,
-    addNestedDocument,
+    getDocument,
     deleteDocument,
     editDocument,
     state,

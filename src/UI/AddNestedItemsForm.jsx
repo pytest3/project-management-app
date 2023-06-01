@@ -1,12 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import { AuthContext } from '../store/auth-context';
 import useFirestore from '../hooks/use-firestore';
-import { db } from '../firebase/firebase-config';
-import { collection } from 'firebase/firestore';
 
 export default function AddNestedItemsForm({ clickedDoc, closeForm }) {
-  const { user } = useContext(AuthContext);
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
   const collectionPath = `/public lists/${clickedDoc.id}/${clickedDoc.title}`;
@@ -15,7 +11,7 @@ export default function AddNestedItemsForm({ clickedDoc, closeForm }) {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    addDocument({ title, details });
+    addDocument({ title, details, isComplete: false });
   };
 
   return (

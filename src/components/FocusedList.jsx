@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import FocusedListItems from '../components/FocusedListItems';
 
-export default function FocusedList({ clickedDoc, title, handleShowForm }) {
+export default function FocusedList({ clickedDoc, handleShowForm }) {
   const [showActive, setShowActive] = useState(false);
 
   return (
     <Wrapper>
       <Header>
-        <Title>{title}</Title>
+        <Title>{clickedDoc.title}</Title>
         <AddButton
           xmlns="http://www.w3.org/2000/svg"
           height="48"

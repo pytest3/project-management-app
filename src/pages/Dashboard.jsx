@@ -1,10 +1,11 @@
 import { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
+import Modal from '../UI/Modal';
+import FocusedList from '../components/FocusedList';
+import SideBarLists from '../components/SideBarLists';
 import useFirestore from '../hooks/use-firestore';
-
-import ListItems from '../components/ListItems';
-import Lists from '../components/Lists';
 import { AuthContext } from '../store/auth-context';
+import AddNestedItemsForm from '../UI/AddNestedItemsForm';
 export default function DashboardPage() {
   const [form, setForm] = useState({
     title: '',
@@ -12,11 +13,11 @@ export default function DashboardPage() {
     isComplete: false,
     userId: '',
   });
-
+  const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
   const { addDocument } = useFirestore('projects');
   const formRef = useRef(null);
-  const [showActive, setShowActive] = useState(false);
+  const [clickedDoc, setClickedDoc] = useState(null);
   const { user } = useContext(AuthContext);
 
   const handleFormSubmit = (e) => {
@@ -33,47 +34,43 @@ export default function DashboardPage() {
     setForm({ ...form, details: e.target.value, userId: user.uid });
   };
 
-  const handleListClick = (item) => {
-    console.log(item);
-    setTitle(item.title);
+  const handleShowForm = () => {
+    setShowForm(true);
+  };
 
-    addDocument();
+  const handleCloseForm = () => {
+    setShowForm(false);
+  };
+
+  const handleListClick = (doc) => {
+    console.log(doc);
+    setTitle(doc.title);
+    setClickedDoc(doc);
   };
 
   return (
     <Wrapper>
+      {showForm && (
+        <AddNestedItemsForm
+          clickedDoc={clickedDoc}
+          closeForm={handleCloseForm}
+        ></AddNestedItemsForm>
+      )}
       <PageHeader>Dashboard</PageHeader>
       <SideBar>
-        <Lists handleListClick={handleListClick} />
+        <SideBarLists handleListClick={handleListClick} />
       </SideBar>
-      <ListDetails>
-        <Title>{title}</Title>
-        <label></label>
-        <input type="text"></input>
-        <label>
-          <input
-            type="checkbox"
-            onClick={() => setShowActive(!showActive)}
-          ></input>
-          Only show active
-        </label>
-        <ListItems showActive={showActive} />
-      </ListDetails>
-
-      {/* <Projects>
-        <ProjectHeader>
-          <Title>Project list</Title>
-          <label>
-            <input
-              type="checkbox"
-              onClick={() => setShowActive(!showActive)}
-            ></input>
-            Only show active
-          </label>
-        </ProjectHeader>
-        <ProjectList showActive={showActive} />
-      </Projects> */}
-
+      <MainArea>
+        {clickedDoc ? (
+          <FocusedList
+            clickedDoc={clickedDoc || {}}
+            title={title}
+            handleShowForm={handleShowForm}
+          ></FocusedList>
+        ) : (
+          <div>Select a list</div>
+        )}
+      </MainArea>
       <CreateProject>
         <Form ref={formRef} onSubmit={handleFormSubmit}>
           <CreateProjectHeader>Create Project</CreateProjectHeader>
@@ -96,24 +93,12 @@ export default function DashboardPage() {
     </Wrapper>
   );
 }
-const ListDetails = styled.div`
+
+const MainArea = styled.div`
   grid-area: projects;
   padding-right: var(--space-5);
-  /* justify-self: start; */
-  /* background-color: var(--color-white); */
   padding: 0 var(--space-5);
   border-radius: var(--border-radius-large);
-  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
-`;
-
-const Projects = styled.div`
-  grid-area: projects;
-  padding-right: var(--space-5);
-  /* justify-self: start; */
-  /* background-color: var(--color-white); */
-  padding: var(--space-5);
-  border-radius: var(--border-radius-large);
-  /* box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px; */
 `;
 
 const SideBar = styled.aside`
@@ -161,19 +146,6 @@ const PageHeader = styled.h1`
   color: var(--color-blueGray-400);
   font-size: var(--font-size-7);
   border-bottom: 1px solid var(--color-blueGray-100);
-`;
-
-const ProjectHeader = styled.h2`
-  margin-bottom: var(--space-4);
-  display: flex;
-  justify-content: space-between;
-`;
-
-const Title = styled.div`
-  font-size: var(--font-size-5);
-  color: var(--color-blueGray-800);
-  font-weight: var(--font-weight-medium);
-  line-height: 1;
 `;
 
 const Wrapper = styled.div`

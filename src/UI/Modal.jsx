@@ -7,15 +7,16 @@ export default function Modal({ closeForm, isPrivateForm }) {
   const [name, setName] = useState('');
   const { addDocument: addPrivateDocument } = useFirestore('private lists');
   const { addDocument: addPublicDocument } = useFirestore('public lists');
+
   const { user } = useContext(AuthContext);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
     closeForm();
     if (isPrivateForm) {
-      addPrivateDocument({ title: name, userId: user.uid });
+      addPrivateDocument({ title: name, userId: user.uid, isPrivate: true });
     } else {
-      addPublicDocument({ title: name, userId: user.uid });
+      addPublicDocument({ title: name, userId: user.uid, isPrivate: false });
     }
   };
 

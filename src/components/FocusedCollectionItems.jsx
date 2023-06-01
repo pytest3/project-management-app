@@ -6,9 +6,11 @@ import FocusedCollectionItem from './FocusedCollectionItem';
 const FocusedCollectionItems = ({ clickedDoc, showActive }) => {
   const { id, title, isPrivate } = clickedDoc;
 
-  const { collectionData } = useCollection(
-    `${isPrivate ? 'public lists' : 'public lists'}/${id}/${title}`,
-  );
+  const collectionPath = `${
+    isPrivate ? 'public lists' : 'public lists'
+  }/${id}/${title}`;
+
+  const { collectionData } = useCollection(collectionPath);
 
   const filteredCollectionData = showActive
     ? collectionData.filter((i) => i.isComplete === false)
@@ -20,6 +22,7 @@ const FocusedCollectionItems = ({ clickedDoc, showActive }) => {
         <FocusedCollectionItem
           key={item.id}
           collectionItem={item}
+          collectionPath={collectionPath}
         ></FocusedCollectionItem>
       ))}
     </Wrapper>

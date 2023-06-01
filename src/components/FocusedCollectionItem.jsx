@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import useFirestore from '../hooks/use-firestore';
 
-export default function FocusedCollectionItem({ collectionItem }) {
-  const { editDocument } = useFirestore('projects');
+export default function FocusedCollectionItem({
+  collectionItem,
+  collectionPath,
+}) {
+  const { editDocument } = useFirestore(collectionPath);
   const { id, isComplete } = collectionItem;
 
   const clickHandler = () => {

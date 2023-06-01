@@ -1,5 +1,5 @@
-import { useEffect, useReducer, useState } from 'react';
-import { collection, addDoc, doc, updateDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, updateDoc } from 'firebase/firestore';
+import { useReducer } from 'react';
 import { db } from '../firebase/firebase-config';
 
 const reducer = (state, action) => {
@@ -38,7 +38,6 @@ const initialState = {
 
 export default function useFirestore(collectionName) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const [ignore, setIgnore] = useState(null);
   const collectionRef = collection(db, collectionName);
 
   const addNestedDocument = (docId, nestedCollectionName, nestedDocument) => {
@@ -58,14 +57,11 @@ export default function useFirestore(collectionName) {
     });
     addDoc(collectionRef, document)
       .then((docRef) => {
-        if (!ignore) {
-          console.log('ignored');
-          dispatch({
-            type: 'ADDED_DOCUMENT',
-            payload: docRef,
-          });
-          // reset form here too i guess
-        }
+        dispatch({
+          type: 'ADDED_DOCUMENT',
+          payload: docRef,
+        });
+        // reset form here too i guess
       })
       .catch((e) =>
         dispatch({
@@ -90,10 +86,6 @@ export default function useFirestore(collectionName) {
   // the below seEffect runs when component unmounts to prevent
   // state from being set (dispatch) when the promise returned from the
   // aync addDoc function resolves successfully
-  useEffect(() => {
-    console.log('effect ran');
-    setIgnore(true);
-  }, []);
 
   return {
     addDocument,

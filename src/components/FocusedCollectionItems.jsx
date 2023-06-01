@@ -12,7 +12,7 @@ const FocusedCollectionItems = ({ clickedDoc, showActive }) => {
   //   user.uid,
   // ]);
 
-  const { collectionData } = useCollection(
+  const { collectionItems } = useCollection(
     `${isPrivate ? 'public lists' : 'public lists'}/${id}/${title}`,
   );
 
@@ -26,16 +26,17 @@ const FocusedCollectionItems = ({ clickedDoc, showActive }) => {
   // console.log(colRef2);
   // // onSnapShot(colRef, (snapshot)=>{}, (error)=>{})
 
-  const filteredCollectionData = showActive
-    ? collectionData.filter((i) => i.isComplete === false)
-    : collectionData;
+  const filteredCollectionItems = showActive
+    ? collectionItems.filter((i) => i.isComplete === false)
+    : collectionItems;
 
   return (
     <Wrapper>
-      {filteredCollectionData.map((item) => (
+      {filteredCollectionItems.map((collectionItem) => (
         <FocusedCollectionItem
-          key={item.id}
-          item={item}
+          key={collectionItem.id}
+          item={collectionItem}
+          isPrivate={isPrivate}
         ></FocusedCollectionItem>
       ))}
     </Wrapper>

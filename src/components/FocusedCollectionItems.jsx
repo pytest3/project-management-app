@@ -7,7 +7,7 @@ const FocusedCollectionItems = ({ clickedDoc, showActive }) => {
   const { id, title, isPrivate } = clickedDoc;
 
   const collectionPath = `${
-    isPrivate ? 'public lists' : 'public lists'
+    isPrivate ? 'private lists' : 'public lists'
   }/${id}/${title}`;
 
   const { collectionData } = useCollection(collectionPath);

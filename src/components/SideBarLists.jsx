@@ -5,7 +5,6 @@ import PublicListItem from './PublicListItem';
 import Modal from '../UI/Modal';
 import useCollection from '../hooks/use-collection';
 import { AuthContext } from '../store/auth-context';
-import { legacy_createStore } from '@reduxjs/toolkit';
 
 export default function SideBarLists({ handleListClick }) {
   const [showAddForm, setShowAddForm] = useState(false);

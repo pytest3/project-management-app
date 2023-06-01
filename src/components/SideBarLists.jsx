@@ -5,6 +5,7 @@ import PublicListItem from './PublicListItem';
 import Modal from '../UI/Modal';
 import useCollection from '../hooks/use-collection';
 import { AuthContext } from '../store/auth-context';
+import { legacy_createStore } from '@reduxjs/toolkit';
 
 export default function SideBarLists({ handleListClick }) {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -19,12 +20,13 @@ export default function SideBarLists({ handleListClick }) {
   const { collectionData: publicCollectionData } =
     useCollection('public lists');
 
-  const handleOpenForm = () => {
+  const handleOpenForm = (isPrivate) => {
     setShowAddForm(true);
-  };
-  const handleOpenPrivateForm = () => {
-    setShowAddForm(true);
-    setIsPrivateForm(true);
+    if (isPrivate === 'private') {
+      setIsPrivateForm(true);
+    } else {
+      setIsPrivateForm(false);
+    }
   };
 
   const handleCloseForm = () => {
@@ -47,7 +49,7 @@ export default function SideBarLists({ handleListClick }) {
             height="48"
             viewBox="0 -960 960 960"
             width="48"
-            onClick={handleOpenPrivateForm}
+            onClick={() => handleOpenForm('private')}
           >
             <path d="M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" />
           </AddButton>
@@ -66,7 +68,7 @@ export default function SideBarLists({ handleListClick }) {
             height="48"
             viewBox="0 -960 960 960"
             width="48"
-            onClick={handleOpenForm}
+            onClick={() => handleOpenForm('public')}
           >
             <path d="M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" />
           </AddButton>

@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import useFirestore from '../hooks/use-firestore';
 
-export default function Project({ item }) {
+export default function FocusedListItem({ item }) {
   const { editDocument } = useFirestore('projects');
-  const { id, isComplete } = item;
+  const { id, isComplete, title } = item;
+  console.log(item);
 
   const clickHandler = () => {
     editDocument(id, { isComplete: !isComplete });

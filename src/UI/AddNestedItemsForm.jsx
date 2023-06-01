@@ -5,7 +5,10 @@ import useFirestore from '../hooks/use-firestore';
 export default function AddNestedItemsForm({ clickedDoc, closeForm }) {
   const [title, setTitle] = useState('');
   const [details, setDetails] = useState('');
-  const collectionPath = `/public lists/${clickedDoc.id}/${clickedDoc.title}`;
+
+  const collectionPath = `/${
+    clickedDoc.isPrivate ? 'private lists' : 'public lists'
+  }/${clickedDoc.id}/${clickedDoc.title}`;
 
   const { addDocument } = useFirestore(collectionPath);
 

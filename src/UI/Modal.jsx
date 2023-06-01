@@ -5,10 +5,9 @@ import { AuthContext } from '../store/auth-context';
 
 export default function Modal({ closeForm, isPrivateForm }) {
   const [name, setName] = useState('');
+  const { user } = useContext(AuthContext);
   const { addDocument: addPrivateDocument } = useFirestore('private lists');
   const { addDocument: addPublicDocument } = useFirestore('public lists');
-
-  const { user } = useContext(AuthContext);
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
@@ -22,7 +21,7 @@ export default function Modal({ closeForm, isPrivateForm }) {
 
   return (
     <Wrapper>
-      <Title>Add List</Title>
+      <Title>Add {isPrivateForm ? 'Private' : 'Public'} List</Title>
       <Form onSubmit={formSubmitHandler}>
         <label htmlFor="listName"></label>
         <input

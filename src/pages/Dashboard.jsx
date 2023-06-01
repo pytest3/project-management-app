@@ -1,6 +1,5 @@
 import { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
-import Modal from '../UI/Modal';
 import FocusedList from '../components/FocusedList';
 import SideBarLists from '../components/SideBarLists';
 import useFirestore from '../hooks/use-firestore';
@@ -14,7 +13,6 @@ export default function DashboardPage() {
     userId: '',
   });
   const [showForm, setShowForm] = useState(false);
-  const [title, setTitle] = useState('');
   const { addDocument } = useFirestore('projects');
   const formRef = useRef(null);
   const [clickedDoc, setClickedDoc] = useState(null);
@@ -44,7 +42,6 @@ export default function DashboardPage() {
 
   const handleListClick = (doc) => {
     console.log(doc);
-    setTitle(doc.title);
     setClickedDoc(doc);
   };
 
@@ -64,7 +61,6 @@ export default function DashboardPage() {
         {clickedDoc ? (
           <FocusedList
             clickedDoc={clickedDoc || {}}
-            title={title}
             handleShowForm={handleShowForm}
           ></FocusedList>
         ) : (

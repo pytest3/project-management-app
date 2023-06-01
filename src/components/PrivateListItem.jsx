@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export default function PrivateListItem({ children }) {
+export default function PrivateListItem({ children, handleListClick, item }) {
   return (
-    <Wrapper>
+    <Wrapper
+      onClick={() => {
+        handleListClick(item);
+      }}
+    >
       <ListIcon
         xmlns="http://www.w3.org/2000/svg"
         height="48"

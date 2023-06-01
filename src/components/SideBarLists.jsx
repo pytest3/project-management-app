@@ -1,10 +1,9 @@
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
-import PrivateListItem from './PrivateListItem';
-import PublicListItem from './PublicListItem';
 import Modal from '../UI/Modal';
 import useCollection from '../hooks/use-collection';
 import { AuthContext } from '../store/auth-context';
+import SideBarListItem from './SideBarListItem';
 
 export default function SideBarLists({ handleListClick }) {
   const [showAddForm, setShowAddForm] = useState(false);
@@ -53,11 +52,17 @@ export default function SideBarLists({ handleListClick }) {
             <path d="M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" />
           </AddButton>
         </HeaderWrapper>
-        <ul>
+        <ListItemWrapper>
           {privateCollectionData.map((i) => (
-            <PrivateListItem key={i.id}>{i.title}</PrivateListItem>
+            <SideBarListItem
+              key={i.id}
+              item={i}
+              handleListClick={handleListClick}
+            >
+              {i.title}
+            </SideBarListItem>
           ))}
-        </ul>
+        </ListItemWrapper>
       </PrivateListWrapper>
       <PublicListWrapper>
         <HeaderWrapper>
@@ -72,22 +77,23 @@ export default function SideBarLists({ handleListClick }) {
             <path d="M450-200v-250H200v-60h250v-250h60v250h250v60H510v250h-60Z" />
           </AddButton>
         </HeaderWrapper>
-        <ul>
+        <ListItemWrapper>
           {publicCollectionData.map((i) => (
-            <PublicListItem
+            <SideBarListItem
               key={i.id}
               item={i}
               handleListClick={handleListClick}
             >
               {i.title}
-            </PublicListItem>
+            </SideBarListItem>
           ))}
-        </ul>
+        </ListItemWrapper>
       </PublicListWrapper>
     </Wrapper>
   );
 }
 
+const ListItemWrapper = styled.ul``;
 const AddButton = styled.svg`
   width: 20px;
   height: 20px;

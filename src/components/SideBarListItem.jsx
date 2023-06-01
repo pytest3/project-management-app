@@ -30,7 +30,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-bottom: var(--space-1);
-  border: 1px solid red;
   position: relative;
 `;
 const ListIcon = styled.svg`

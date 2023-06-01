@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import FocusedListItems from '../components/FocusedListItems';
+import FocusedCollectionItems from './FocusedCollectionItems';
 
-export default function FocusedList({ clickedDoc, handleShowForm }) {
+export default function FocusedCollection({ clickedDoc, handleShowForm }) {
   const [showActive, setShowActive] = useState(false);
 
   return (
@@ -26,7 +26,10 @@ export default function FocusedList({ clickedDoc, handleShowForm }) {
         ></input>
         Only show active
       </label>
-      <FocusedListItems clickedDoc={clickedDoc || {}} showActive={showActive} />
+      <FocusedCollectionItems
+        clickedDoc={clickedDoc || {}}
+        showActive={showActive}
+      />
     </Wrapper>
   );
 }

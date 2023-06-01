@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
-import FocusedList from '../components/FocusedList';
+import FocusedList from '../components/FocusedCollection';
 import SideBarLists from '../components/SideBarLists';
 import useFirestore from '../hooks/use-firestore';
 import { AuthContext } from '../store/auth-context';

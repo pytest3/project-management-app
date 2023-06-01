@@ -1,9 +1,9 @@
 import { memo } from 'react';
 import useCollection from '../hooks/use-collection';
 import styled from 'styled-components';
-import FocusedListItem from './FocusedListItem';
+import FocusedCollectionItem from './FocusedCollectionItem';
 
-const FocusedListItems = ({ clickedDoc, showActive }) => {
+const FocusedCollectionItems = ({ clickedDoc, showActive }) => {
   const { id, title, isPrivate } = clickedDoc;
 
   // const { collectionData } = useCollection('projects', [
@@ -33,11 +33,14 @@ const FocusedListItems = ({ clickedDoc, showActive }) => {
   return (
     <Wrapper>
       {filteredCollectionData.map((item) => (
-        <FocusedListItem key={item.id} item={item}></FocusedListItem>
+        <FocusedCollectionItem
+          key={item.id}
+          item={item}
+        ></FocusedCollectionItem>
       ))}
     </Wrapper>
   );
 };
 const Wrapper = styled.ul``;
 
-export default memo(FocusedListItems);
+export default memo(FocusedCollectionItems);

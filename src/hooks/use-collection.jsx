@@ -10,8 +10,8 @@ import { db } from '../firebase/firebase-config';
 
 export default function useCollection(collectionName, queryParams) {
   const [collectionData, setCollectionData] = useState([]);
-
   const collectionRef = collection(db, collectionName);
+
   let queryRef = query(collectionRef);
 
   if (queryParams) {
@@ -28,6 +28,7 @@ export default function useCollection(collectionName, queryParams) {
       queryRef,
       (snapshot) => {
         let data = [];
+
         snapshot.forEach((doc) => {
           data.push({ id: doc.id, ...doc.data() });
         });

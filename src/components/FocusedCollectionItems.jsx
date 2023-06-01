@@ -6,37 +6,20 @@ import FocusedCollectionItem from './FocusedCollectionItem';
 const FocusedCollectionItems = ({ clickedDoc, showActive }) => {
   const { id, title, isPrivate } = clickedDoc;
 
-  // const { collectionData } = useCollection('projects', [
-  //   'userId',
-  //   '==',
-  //   user.uid,
-  // ]);
-
-  const { collectionItems } = useCollection(
+  const { collectionData } = useCollection(
     `${isPrivate ? 'public lists' : 'public lists'}/${id}/${title}`,
   );
 
-  // const nestedCollectionTitle = title;
-
-  // const nestedCollectionPath = `${}`
-
-  // const colRef = collection(db, 'public lists', id, nestedCollectionTitle);
-
-  // const colRef2 = collection(db, 'public lists/l35l0rU9kU2WYQqHklzE/doc 1');
-  // console.log(colRef2);
-  // // onSnapShot(colRef, (snapshot)=>{}, (error)=>{})
-
-  const filteredCollectionItems = showActive
-    ? collectionItems.filter((i) => i.isComplete === false)
-    : collectionItems;
+  const filteredCollectionData = showActive
+    ? collectionData.filter((i) => i.isComplete === false)
+    : collectionData;
 
   return (
     <Wrapper>
-      {filteredCollectionItems.map((collectionItem) => (
+      {filteredCollectionData.map((item) => (
         <FocusedCollectionItem
-          key={collectionItem.id}
-          item={collectionItem}
-          isPrivate={isPrivate}
+          key={item.id}
+          collectionItem={item}
         ></FocusedCollectionItem>
       ))}
     </Wrapper>

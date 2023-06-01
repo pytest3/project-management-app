@@ -1,17 +1,16 @@
 import styled from 'styled-components';
 import useFirestore from '../hooks/use-firestore';
 
-export default function FocusedCollectionItem({ item }) {
+export default function FocusedCollectionItem({ collectionItem }) {
   const { editDocument } = useFirestore('projects');
-  const { id, isComplete } = item;
-  console.log(item);
+  const { id, isComplete } = collectionItem;
 
   const clickHandler = () => {
     editDocument(id, { isComplete: !isComplete });
   };
 
   return (
-    <Wrapper key={item.id} isComplete={isComplete}>
+    <Wrapper key={collectionItem.id} isComplete={isComplete}>
       <label>
         <input
           type="checkbox"
@@ -19,7 +18,7 @@ export default function FocusedCollectionItem({ item }) {
           onClick={clickHandler}
           defaultChecked={isComplete}
         />
-        {item.title}
+        {collectionItem.title}
       </label>
     </Wrapper>
   );

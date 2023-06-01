@@ -36,9 +36,9 @@ const initialState = {
   isSuccess: null,
 };
 
-export default function useFirestore(collectionName) {
+export default function useFirestore(collectionPath) {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const collectionRef = collection(db, collectionName);
+  const collectionRef = collection(db, collectionPath);
 
   const addNestedDocument = (docId, nestedCollectionName, nestedDocument) => {
     dispatch({ type: 'PENDING' });
@@ -76,7 +76,7 @@ export default function useFirestore(collectionName) {
   };
 
   const editDocument = (id, data) => {
-    const docRef = doc(db, collectionName, id);
+    const docRef = doc(db, collectionPath, id);
     updateDoc(docRef, data)
       .then(() => console.log('Updated'))
       .catch((error) => console.log(error));

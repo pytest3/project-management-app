@@ -28,9 +28,8 @@ export default function useCollection(collectionName, queryParams) {
       queryRef,
       (snapshot) => {
         let data = [];
-
         snapshot.forEach((doc) => {
-          data.push({ id: doc.id, ...doc.data() });
+          data.push({ id: doc.id, ...doc.data(), path: doc.ref.path });
         });
         setCollectionData(data);
       },
